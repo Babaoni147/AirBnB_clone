@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for BaseModel class """
+
 import unittest
 import json
 import pep8
@@ -98,5 +99,3 @@ class TestBaseModel(unittest.TestCase):
         update_aux = bm1_dic["updated_at"].split("T")
         self.assertEqual(" ".join(update_aux),
                          str(self.bm_instance1.updated_at))
-
-

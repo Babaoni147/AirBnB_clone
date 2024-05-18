@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for FileStorage class """
+
 import unittest
 import json
 import pep8
@@ -43,13 +44,13 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(FileStorage.reload.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.storage_instance, FileStorage)
         self.assertEqual(type(models.storage).__name__, "FileStorage")
         self.assertEqual(type(self.storage_instance).__name__, "FileStorage")
 
     def test_file_storage_exist(self):
-        """ Checks if methods exists """
+        """ Checks methods exists """
         storage_instance = FileStorage()
         self.assertTrue(hasattr(storage_instance, "all"))
         self.assertTrue(hasattr(storage_instance, "new"))
@@ -57,7 +58,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(hasattr(storage_instance, "reload"))
 
     def test_BaseModel_saveStorage(self):
-        """ Checks if the save function works """
+        """ Checks save function """
         self.bm_instance = BaseModel()
         self.bm_instance.name = "Pinocho"
         self.bm_instance.save()
@@ -152,4 +153,3 @@ class TestFileStorage(unittest.TestCase):
         result = pep8style.check_files([
             '/tests/test_models/test_engine/test_file_storageconsole.py'])
         self.assertEqual(result.total_errors, 1)
-

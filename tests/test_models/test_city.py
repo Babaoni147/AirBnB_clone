@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for City class """
+
 import unittest
 import json
 import pep8
@@ -33,11 +34,11 @@ class TestCity(unittest.TestCase):
         self.assertIsNotNone(City.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.city1, City)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.city1.save()
         city1_json = self.city1.to_dict()
         my_new_city = City(**city1_json)
@@ -47,12 +48,11 @@ class TestCity(unittest.TestCase):
         self.assertIsNot(self.city1, my_new_city)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.city1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.city1.updated_at
         self.city1.save()
         self.assertNotEqual(variable_update, self.city1.updated_at)
-
