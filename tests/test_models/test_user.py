@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for User class """
+
 import unittest
 import json
 import pep8
@@ -35,11 +36,11 @@ class TestUser(unittest.TestCase):
         self.assertIsNotNone(User.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.user1, User)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.user1.save()
         user1_json = self.user1.to_dict()
         my_new_user = User(**user1_json)
@@ -49,11 +50,11 @@ class TestUser(unittest.TestCase):
         self.assertIsNot(self.user1, my_new_user)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.user1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.user1.updated_at
         self.user1.save()
         self.assertNotEqual(variable_update, self.user1.updated_at)

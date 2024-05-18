@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for Amenity class """
+
 import unittest
 import json
 import pep8
@@ -32,11 +33,11 @@ class TestAmenity(unittest.TestCase):
         self.assertIsNotNone(Amenity.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.amenity1, Amenity)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.amenity1.save()
         amenity1_json = self.amenity1.to_dict()
         my_new_amenity = Amenity(**amenity1_json)
@@ -46,12 +47,11 @@ class TestAmenity(unittest.TestCase):
         self.assertIsNot(self.amenity1, my_new_amenity)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.amenity1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.amenity1.updated_at
         self.amenity1.save()
         self.assertNotEqual(variable_update, self.amenity1.updated_at)
-

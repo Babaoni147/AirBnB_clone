@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for State class """
+
 import unittest
 import json
 import pep8
@@ -32,11 +33,11 @@ class TestState(unittest.TestCase):
         self.assertIsNotNone(State.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.state1, State)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.state1.save()
         state1_json = self.state1.to_dict()
         my_new_state = State(**state1_json)
@@ -46,13 +47,11 @@ class TestState(unittest.TestCase):
         self.assertIsNot(self.state1, my_new_state)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.state1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.state1.updated_at
         self.state1.save()
         self.assertNotEqual(variable_update, self.state1.updated_at)
-
-

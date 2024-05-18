@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for Place class """
+
 import unittest
 import json
 import pep8
@@ -42,11 +43,11 @@ class TestPlace(unittest.TestCase):
         self.assertIsNotNone(Place.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.place1, Place)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.place1.save()
         place1_json = self.place1.to_dict()
         my_new_place = Place(**place1_json)
@@ -56,12 +57,11 @@ class TestPlace(unittest.TestCase):
         self.assertIsNot(self.place1, my_new_place)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.place1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.place1.updated_at
         self.place1.save()
         self.assertNotEqual(variable_update, self.place1.updated_at)
-

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Unittest for Review class """
+
 import unittest
 import json
 import pep8
@@ -34,11 +35,11 @@ class TestReview(unittest.TestCase):
         self.assertIsNotNone(Review.__doc__)
 
     def test_is_instance(self):
-        """Test for instantiation"""
+        """Test instantiation"""
         self.assertIsInstance(self.review1, Review)
 
     def test_attributes(self):
-        """Test to check attributes"""
+        """Test attributes"""
         self.review1.save()
         review1_json = self.review1.to_dict()
         my_new_review = Review(**review1_json)
@@ -48,13 +49,11 @@ class TestReview(unittest.TestCase):
         self.assertIsNot(self.review1, my_new_review)
 
     def test_subclass(self):
-        """Test to check the inheritance"""
+        """Test inheritance"""
         self.assertTrue(issubclass(self.review1.__class__, BaseModel), True)
 
     def test_save(self):
-        """Test to check save method"""
+        """Test save method"""
         variable_update = self.review1.updated_at
         self.review1.save()
         self.assertNotEqual(variable_update, self.review1.updated_at)
-
-
