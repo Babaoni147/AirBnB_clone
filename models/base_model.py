@@ -33,7 +33,8 @@ class BaseModel:
 
     def __str__(self):
         """ Writing the __str__ method """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
 
     def save(self):
         """ Public instance methods:

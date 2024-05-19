@@ -111,14 +111,27 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args_list) < 2:
             print("** instance id missing **")
-        elif len(args_list) < 3:
-            print("** attribute name missing **")
-        elif len(args_list) < 4:
-            print("** value missing **")
         else:
             id_object = "{}.{}".format(args_list[0], args_list[1])
             if id_object not in storage.all():
                 print("** no instance found **")
+            elif len(args_list) == 3 and args_list[2].startswith("{") and args_list[2].endswith("}"):
+                # Handle dictionary input
+                try:
+                    attributes = eval(args_list[2])
+                    if isinstance(attributes, dict):
+                        instance = storage.all()[id_object]
+                        for key, value in attributes.items():
+                            setattr(instance, key, value)
+                        instance.save()
+                    else:
+                        print("** attribute name missing **")
+                except Exception as e:
+                    print("** invalid dictionary **")
+            elif len(args_list) < 3:
+                print("** attribute name missing **")
+            elif len(args_list) < 4:
+                print("** value missing **")
             else:
                 instance = storage.all()[id_object]
                 attr_name = args_list[2]
