@@ -115,8 +115,8 @@ class HBNBCommand(cmd.Cmd):
             id_object = "{}.{}".format(args_list[0], args_list[1])
             if id_object not in storage.all():
                 print("** no instance found **")
-            elif len(args_list) == 3 and args_list[2].startswith("{") and args_list[2].endswith("}"):
-                # Handle dictionary input
+            elif (len(args_list) == 3 and args_list[2].startswith("{") and
+                  args_list[2].endswith("}")):
                 try:
                     attributes = eval(args_list[2])
                     if isinstance(attributes, dict):
@@ -126,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
                         instance.save()
                     else:
                         print("** attribute name missing **")
-                except Exception as e:
+                except Exception:
                     print("** invalid dictionary **")
             elif len(args_list) < 3:
                 print("** attribute name missing **")
