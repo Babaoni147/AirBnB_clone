@@ -68,8 +68,10 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[id_object])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id
-        (save the change into the JSON file)"""
+        """
+        Deletes an instance based on the class name and id
+        (save the change into the JSON file)
+        """
         args_list = shlex.split(arg)
         if not args_list:
             print("** class name missing **")
@@ -86,8 +88,10 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances
-        based or not on the class name"""
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        """
         element_list = []
         args_list = shlex.split(arg)
         if not args_list:
@@ -111,27 +115,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args_list) < 2:
             print("** instance id missing **")
+        elif len(args_list) < 3:
+            print("** attribute name missing **")
+        elif len(args_list) < 4:
+            print("** value missing **")
         else:
             id_object = "{}.{}".format(args_list[0], args_list[1])
             if id_object not in storage.all():
                 print("** no instance found **")
-            elif (len(args_list) == 3 and args_list[2].startswith("{") and
-                  args_list[2].endswith("}")):
-                try:
-                    attributes = eval(args_list[2])
-                    if isinstance(attributes, dict):
-                        instance = storage.all()[id_object]
-                        for key, value in attributes.items():
-                            setattr(instance, key, value)
-                        instance.save()
-                    else:
-                        print("** attribute name missing **")
-                except Exception:
-                    print("** invalid dictionary **")
-            elif len(args_list) < 3:
-                print("** attribute name missing **")
-            elif len(args_list) < 4:
-                print("** value missing **")
             else:
                 instance = storage.all()[id_object]
                 attr_name = args_list[2]
@@ -165,8 +156,10 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def default(self, arg):
-        """Method called on an input line when the command prefix
-        is not recognized"""
+        """
+        Method called on an input line when the command prefix
+        is not recognized
+        """
         args_list = arg.split(".", 1)
         if args_list[0] in HBNBCommand.list_classes:
             method = args_list[1].split("(")[0]
