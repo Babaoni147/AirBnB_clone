@@ -99,3 +99,6 @@ class TestBaseModel(unittest.TestCase):
         update_aux = bm1_dic["updated_at"].split("T")
         self.assertEqual(" ".join(update_aux),
                          str(self.bm_instance1.updated_at))
+
+ #   if __name__ == '__main__':
+ #       unittest.main()
