@@ -1,41 +1,40 @@
 #!/usr/bin/python3
-"""
-BaseModel class that defines all common attributes/methods for other classes
-"""
+"""BaseModel class defines common attributes/methods"""
 
 import uuid
 from datetime import datetime
 import models
-import json
-isoform_time = "%Y-%m-%dT%H:%M:%S.%f"
+
+time_form = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
-    """ Definning the base class from which the other
-        classes will inherit
-    """
+    """Define HBnB Base_Model"""
     def __init__(self, *args, **kwargs):
         """ Initialization of the object/instance attributes """
-        if kwargs is None or len(kwargs) == 0:
+
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.strptime(value, time_form))
+                elif key != "__class__":
+                    setattr(self, key, value)
+            if "id" not in kwargs:
+                self.id = str(uuid.uuid4())
+            if "created_at" not in kwargs:
+                self.created_at = datetime.now()
+            if "updated_at" not in kwargs:
+                self.updated_at = datetime.now()
+        else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
-        else:
-            for key, value in kwargs.items():
-                if key == "id":
-                    self.id = value
-                elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, isoform_time)
-                elif key is "__class__":
-                    pass
-                elif key is not "__class__":
-                    self.__dict__[key] = value
 
     def __str__(self):
         """ Writing the __str__ method """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
 
     def save(self):
         """ Public instance methods:
